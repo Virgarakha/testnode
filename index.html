@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login XRPL1</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300..900;1,300..900&display=swap"
+      rel="stylesheet"
+    />
+    <!-- Login page -->
+</head>
+<body>
+    <!-- pop up display desktop -->
+     <div class="boxpopup">
+        <div class="popup">
+            <h1>Peringatan!</h1>
+            <div class="line"></div>
+            <p>wah maaf app ini tidak mendukung device yang kamu pakai :(</p>
+         </div>
+     </div>
+    <!-- pop up display desktop -->
+    <div class="hp">
+        <div class="peringatan">
+            <marquee behavior="scroll" direction="left" scrollamount="10">
+                <p>App Hanya berfungsi untuk pengguna mobile</p>
+            </marquee>
+        </div>
+        <div class="container">
+            <div class="box">
+                <div class="logo">
+                </div>
+                <form onsubmit="return submitForm(this)">
+                  <li><input type="text" placeholder="Username" id="username" /></li>
+                  <li><input type="password" placeholder="Password" id="password" /></li>
+                  <button type="submit" onclick="login(event)">Login</button>
+                  <a
+                    href="app/data/asset/view/admin/fathur.html"
+                    id="fathur"
+                    style="display: none"
+                  ></a>
+                </form>
+            </div>
+        </div>
+    </div>
+    <script>
+        function login(event) {
+            event.preventDefault();
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+
+            console.log(`Sending login request: username=${username}, password=${password}`);
+
+            fetch('http://localhost:3000/login', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ username, password })
+            })
+            .then(response => response.text())
+            .then(data => {
+                console.log(data);
+                // Redirect or show a message here
+            })
+            .catch(error => console.error('Error:', error));
+        }
+    </script>
+</body>
+</html>
